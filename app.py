@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, flash
+from flask import Flask, request, session, render_template, flash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -8,7 +8,8 @@ db = SQLAlchemy(app)
 
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False, unique=True)
+    usn = db.Column(db.String(20), unique=True, nullable=False)  # New unique USN field
+    name = db.Column(db.String(50), nullable=False)
     branch = db.Column(db.String(50), nullable=False)
     semester = db.Column(db.String(50), nullable=False)
 
@@ -18,25 +19,34 @@ def create_tables():
 
 @app.route('/qrCode', methods=['GET', 'POST'])
 def qr_code_page():
+    session.pop('_flashes', None)
+    
     if request.method == 'POST':
+        usn = request.form.get('usn')
         name = request.form.get('name')
         branch = request.form.get('branch')
         semester = request.form.get('semester')
 
-        if not name or not branch:
+        if not usn or not name or not branch or not semester:
             return "Invalid data", 400
-        existing_student = Student.query.filter_by(name=name).first()
-        if existing_student:
-            flash("Name already exists!")
-            return render_template('qrCode.html')
-        
-        new_student = Student(name=name, branch=branch, semester=semester)
-        db.session.add(new_student)
-        db.session.commit()
 
-        flash("Data entered successfully!")
+        # Search for existing student by USN
+        existing_student = Student.query.filter_by(usn=usn).first()
+
+        if existing_student:
+            existing_student.name = name
+            existing_student.branch = branch
+            existing_student.semester = semester
+            db.session.commit()
+            flash("Data updated successfully!", category='info')
+        else:
+            new_student = Student(usn=usn, name=name, branch=branch, semester=semester)
+            db.session.add(new_student)
+            db.session.commit()
+            flash("Data entered successfully!", category='info')
+
         return render_template('qrCode.html')
-    
+
     return render_template('qrCode.html')
 
 @app.route('/counter/<branch>', methods=['GET'])
