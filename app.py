@@ -1,11 +1,13 @@
 from flask import Flask, request, session, render_template, flash
 from flask_sqlalchemy import SQLAlchemy
 
+# Create Flask app
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
 app.config['SECRET_KEY'] = 'SECRET_KEY'
 db = SQLAlchemy(app)
 
+# Create Student model
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     usn = db.Column(db.String(20), unique=True, nullable=False)  # New unique USN field
@@ -17,10 +19,12 @@ def create_tables():
     with app.app_context():
         db.create_all()
 
+# Routes
 @app.route('/', methods=['GET'])
 def home_page():
     return render_template('index.html')
 
+# QR Code page
 @app.route('/qrCode', methods=['GET', 'POST'])
 def qr_code_page():
     session.pop('_flashes', None)
@@ -53,10 +57,12 @@ def qr_code_page():
 
     return render_template('qrCode.html')
 
+# Counter selection page
 @app.route('/counter', methods=['GET'])
 def counter_selection():
     return render_template('counter_selection.html')
 
+# Counter page
 @app.route('/counter/<branch>', methods=['GET'])
 def get_branch_data(branch):
     students = Student.query.filter_by(branch=branch).all()
