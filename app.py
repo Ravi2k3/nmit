@@ -10,6 +10,7 @@ class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
     branch = db.Column(db.String(50), nullable=False)
+    semester = db.Column(db.String(50), nullable=False)
 
 def create_tables():
     with app.app_context():
@@ -20,6 +21,7 @@ def qr_code_page():
     if request.method == 'POST':
         name = request.form.get('name')
         branch = request.form.get('branch')
+        semester = request.form.get('semester')
 
         if not name or not branch:
             return "Invalid data", 400
@@ -28,7 +30,7 @@ def qr_code_page():
             flash("Name already exists!")
             return render_template('qrCode.html')
         
-        new_student = Student(name=name, branch=branch)
+        new_student = Student(name=name, branch=branch, semester=semester)
         db.session.add(new_student)
         db.session.commit()
 
@@ -41,7 +43,7 @@ def qr_code_page():
 def get_branch_data(branch):
     students = Student.query.filter_by(branch=branch).all()
     if students:
-        return render_template('counter.html', branch=branch, students=students)
+        return render_template('counter.html', branch=branch, students=students, semester=students[0].semester)
     else:
         return "Invalid branch or no data", 400
 

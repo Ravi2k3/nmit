@@ -1,55 +1,127 @@
 <!DOCTYPE html>
 <html lang="EN">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
     <title>Branch Selector</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMt23cez/egQFZav5w7d5z/7q5P5K+5fR5F3eO5" crossorigin="anonymous">
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 50px;
+            background: linear-gradient(to right, #f0f0f0, #e6e6e6);
+            margin: 0;
+            padding: 0;
             color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            margin-bottom: 24px;
+            color: #4a4a4a;
         }
         form {
-            max-width: 400px;
-            margin: auto;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 24px;  /* Added spacing */
         }
-        label, select, input {
+        .form-group {
+            position: relative;
+            margin-bottom: 24px;
+            border: 1px solid rgba(0, 0, 0, 0.1);  /* Added outline */
+            border-radius: 12px;
+            overflow: hidden;  /* To apply border-radius to inner items */
+        }
+        .form-group i {
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            transform: translateY(-50%);
+            color: #a0a0a0;
+            z-index: 1;  /* Ensure icon stays above the input/select element */
+        }
+        label {
+            display: none;  /* Hide label elements */
+        }
+        select, input {
             display: block;
             width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            padding: 16px;
+            padding-left: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
             box-sizing: border-box;
+            transition: all 0.3s ease-in-out;
+            font-size: 16px;
+            z-index: 0;  /* Ensure input/select stays below the icon */
+        }
+        select {
+            appearance: none;
+            cursor: pointer;
+        }
+        select:focus, input:focus {
+            outline: 1px;
+            box-shadow: 1px 1px 1px 2px rgba(0, 122, 255, 0.5);
+            background: rgba(255, 255, 255, 0.8);
         }
         input[type="submit"] {
-            background-color: #007AFF;
+            background: linear-gradient(to right, #007AFF, #0056b3);
             color: white;
             cursor: pointer;
+            font-size: 18px;
+            border-radius: 12px;  /* Added rounded corners */
+            transition: background 0.3s ease-in-out;
+        }
+        input[type="submit"]:hover {
+            background: linear-gradient(to right, #0056b3, #003d7a);
         }
     </style>
 </head>
 <body>
+    <h1>Student Registration</h1>
     <form id="studentForm" method="post" action="/qrCode">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <div class="form-group">
+            <i class="fas fa-user"></i>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Name" required>
+        </div>
 
-        <label for="branch">Branch:</label>
-        <select id="branch" name="branch">
-            <option value="CSE">CSE</option>
-            <option value="ECE">ECE</option>
-            <option value="ISE">ISE</option>
-            <option value="AIML">AIML</option>
-            <option value="AIDS">AIDS</option>
-            <option value="CIVIL">CIVIL</option>
-            <option value="MECH">MECH</option>
-            <option value="AERO">AERO</option>
-        </select>
+        <div class="form-group">
+            <i class="fas fa-graduation-cap"></i>
+            <label for="branch">Branch</label>
+            <select id="branch" name="branch" required>
+                <option value="" disabled selected>Please select your branch</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="ISE">ISE</option>
+                <option value="AIML">AIML</option>
+                <option value="AIDS">AIDS</option>
+                <option value="CIVIL">CIVIL</option>
+                <option value="MECH">MECH</option>
+                <option value="AERO">AERO</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <i class="fas fa-calendar-alt"></i>
+            <label for="semester">Semester</label>
+            <select id="semester" name="semester" required>
+                <option value="" disabled selected>Please select your semester</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select>
+        </div>
 
         <input type="submit" value="Submit">
     </form>
