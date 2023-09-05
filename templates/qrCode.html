@@ -80,6 +80,14 @@
         input[type="submit"]:hover {
             background: linear-gradient(to right, #0056b3, #003d7a);
         }
+        .logo-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px; /* You can adjust this */
+            height: auto;
+            scale: 0.5; /* You can adjust this */
+        }
     </style>
 </head>
 {% with messages = get_flashed_messages(category_filter=['info']) %}
@@ -115,6 +123,7 @@
                 <option value="CIVIL">CIVIL</option>
                 <option value="MECH">MECH</option>
                 <option value="AERO">AERO</option>
+                <option value="ELEC">ELEC</option>  
             </select>
         </div>
 
@@ -136,5 +145,8 @@
 
         <input type="submit" value="Submit">
     </form>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='Automa-A.svg') }}" alt="My Logo">
+    </div>
 </body>
 </html>

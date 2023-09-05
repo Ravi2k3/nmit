@@ -49,6 +49,10 @@ def qr_code_page():
 
     return render_template('qrCode.html')
 
+@app.route('/counter_selection', methods=['GET'])
+def counter_selection():
+    return render_template('counter_selection.html')
+
 @app.route('/counter/<branch>', methods=['GET'])
 def get_branch_data(branch):
     students = Student.query.filter_by(branch=branch).all()
