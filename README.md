@@ -10,9 +10,7 @@ This project is a web application built using Python and HTML. It serves two mai
 ## Features
 
 - Simple and intuitive user interface.
-- Allows the user to switch between counter and QR code functionalities.
 - Real-time updates on the counter.
-- Quick QR Code generation and display.
 
 ## Installation and Setup
 
@@ -25,7 +23,7 @@ This project is a web application built using Python and HTML. It serves two mai
 
 1. **Clone the Repository**
     ```bash
-    git clone <repository_url>
+    git clone https://github.com/Ravi2k3/nmit.git
     ```
 
 2. **Navigate to Project Directory**
@@ -54,7 +52,7 @@ This project is a web application built using Python and HTML. It serves two mai
 - `app.py` : The main Python script responsible for back-end logic.
 - `counter.html` : HTML file that makes up the counter interface.
 - `counter_selection.html` : HTML file for the initial choice between counter and QR code functionalities.
-- `qrCode.html` : HTML file for generating and displaying the QR code.
+- `qrCode.html` : Allows the user to  enter their details.
 
 ## Contributing
 
