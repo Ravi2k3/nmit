@@ -2,6 +2,69 @@
 <html lang="EN">
 <head>
     <title>Counter Selection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        background: #f0eceb; /* Off-white background */
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh; /* Full viewport height */
+    }
+
+    .button-container {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px; /* Reduced padding */
+        width: 350px; /* Reduced width */
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        align-items: center;
+    }
+
+    h1 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 2em;
+    }
+
+    .button {
+        display: block;
+        background: linear-gradient(145deg, #f7d9d9, #fb8c8c);
+        color: #333;
+        margin: 8px auto; /* Reduced margin */
+        padding: 12px 25px; /* Reduced padding */
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .button:hover {
+        background: linear-gradient(145deg, #e6e6e6, #ffffff);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+        }
+    .logo-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px; /* You can adjust this */
+            height: auto;
+            scale: 0.5; /* You can adjust this */
+        }
+    </style>
 </head>
 <body>
     <div class = "button-container">
@@ -15,6 +78,9 @@
         <a href="/counter/AERO" class="button">Aeronautical Engg</a>
         <a href="/counter/ELEC" class="button">Electrical and Electronics Engg</a>
         <a href="/counter/CIVIL" class="button">Civil Engg</a>
+    </div>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='Automa-A.svg') }}" alt="My Logo">
     </div>
 </body>
 </html>

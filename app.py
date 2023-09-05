@@ -17,6 +17,10 @@ def create_tables():
     with app.app_context():
         db.create_all()
 
+@app.route('/', methods=['GET'])
+def home_page():
+    return render_template('index.html')
+
 @app.route('/qrCode', methods=['GET', 'POST'])
 def qr_code_page():
     session.pop('_flashes', None)
@@ -49,7 +53,7 @@ def qr_code_page():
 
     return render_template('qrCode.html')
 
-@app.route('/counter_selection', methods=['GET'])
+@app.route('/counter', methods=['GET'])
 def counter_selection():
     return render_template('counter_selection.html')
 
