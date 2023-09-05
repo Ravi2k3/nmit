@@ -1,8 +1,9 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, flash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
+app.config['SECRET_KEY'] = 'SECRET_KEY'
 db = SQLAlchemy(app)
 
 class Student(db.Model):
@@ -24,15 +25,17 @@ def qr_code_page():
             return "Invalid data", 400
         existing_student = Student.query.filter_by(name=name).first()
         if existing_student:
-            return render_template('qrCode.html', message = "Name already exists")
+            flash("Name already exists!")
+            return render_template('qrCode.html')
         
         new_student = Student(name=name, branch=branch)
         db.session.add(new_student)
         db.session.commit()
-        
-        return render_template('qrCode.html', "Data submitted successfully")
+
+        flash("Data entered successfully!")
+        return render_template('qrCode.html')
     
-    return render_template('qrCode.html', message="")
+    return render_template('qrCode.html')
 
 @app.route('/counter/<branch>', methods=['GET'])
 def get_branch_data(branch):
