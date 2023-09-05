@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="EN">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <title>Branch Selector</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 50px;
+            color: #333;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        label, select, input {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007AFF;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form id="studentForm" method="post" action="/qrCode">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="branch">Branch:</label>
+        <select id="branch" name="branch">
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="ISE">ISE</option>
+            <option value="AIML">AIML</option>
+            <option value="AIDS">AIDS</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="MECH">MECH</option>
+            <option value="AERO">AERO</option>
+        </select>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+    <title>Counter Page</title>
+    <meta http-equiv="refresh" content="5"> <!-- Refresh every 5 seconds -->
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 50px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            max-width: 400px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ branch }} Counter</h1>
+    <ul>
+        {% for student in students %}
+            <li>{{ student.name }} - {{ student.branch }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
