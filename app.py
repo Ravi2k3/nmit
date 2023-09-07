@@ -36,7 +36,7 @@ def qr_code_page():
         semester = request.form.get('semester')
 
         if not usn or not name or not branch or not semester:
-            return "Invalid data", 400
+            return flash("Enter valid Info!", category='info')
 
         # Search for existing student by USN
         existing_student = Student.query.filter_by(usn=usn).first()
