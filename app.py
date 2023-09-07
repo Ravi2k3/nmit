@@ -1,4 +1,4 @@
-from flask import Flask, request, session, render_template, flash
+from flask import Flask, request, session, render_template, flash, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 
 # Create Flask app
@@ -23,6 +23,10 @@ def create_tables():
 @app.route('/', methods=['GET'])
 def home_page():
     return render_template('index.html')
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(app.root_path, './favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 # QR Code page
 @app.route('/qrCode', methods=['GET', 'POST'])
